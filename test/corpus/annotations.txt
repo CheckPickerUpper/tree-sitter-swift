@@ -148,3 +148,115 @@ Back deployed attribute with a version label
       (visibility_modifier))
     (simple_identifier)
     (function_body)))
+
+================================================================================
+Compiler directive between a function's attributes
+================================================================================
+
+@available(macOS 10.15, *)
+#if compiler(>=6.2)
+@available(*, deprecated)
+#endif
+@inlinable
+func f() {}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (modifiers
+      (attribute
+        (user_type
+          (type_identifier))
+        (simple_identifier)
+        (integer_literal)
+        (integer_literal))
+      (directive
+        (integer_literal)
+        (integer_literal))
+      (attribute
+        (user_type
+          (type_identifier))
+        (simple_identifier))
+      (directive)
+      (attribute
+        (user_type
+          (type_identifier))))
+    (simple_identifier)
+    (function_body)))
+
+================================================================================
+Compiler directive with an else branch between a method's attributes
+================================================================================
+
+class C {
+  @objc
+  #if DEBUG
+  @discardableResult
+  #else
+  @inline(__always)
+  #endif
+  public func g() -> Int { 1 }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_declaration
+    (type_identifier)
+    (class_body
+      (function_declaration
+        (modifiers
+          (attribute
+            (user_type
+              (type_identifier)))
+          (directive
+            (simple_identifier))
+          (attribute
+            (user_type
+              (type_identifier)))
+          (directive)
+          (attribute
+            (user_type
+              (type_identifier))
+            (simple_identifier))
+          (directive)
+          (visibility_modifier))
+        (simple_identifier)
+        (user_type
+          (type_identifier))
+        (function_body
+          (statements
+            (integer_literal)))))))
+
+================================================================================
+Compiler directive between a local function's attributes
+================================================================================
+
+func outer() {
+  @MainActor
+  #if os(macOS)
+  @Sendable
+  #endif
+  func inner() {}
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (simple_identifier)
+    (function_body
+      (statements
+        (function_declaration
+          (attribute
+            (user_type
+              (type_identifier)))
+          (directive
+            (simple_identifier))
+          (attribute
+            (user_type
+              (type_identifier)))
+          (directive)
+          (simple_identifier)
+          (function_body))))))

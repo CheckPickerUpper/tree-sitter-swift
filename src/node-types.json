@@ -5410,6 +5410,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "inheritance_modifier",
           "named": true
         },
@@ -12951,6 +12955,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "inheritance_modifier",
           "named": true
         },
@@ -17809,6 +17817,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "function_modifier",
           "named": true
         },
@@ -22635,6 +22647,10 @@
       "types": [
         {
           "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -29789,6 +29805,10 @@
       "types": [
         {
           "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {

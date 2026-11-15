@@ -2226,7 +2226,15 @@ module.exports = grammar({
         )
       ),
     _locally_permitted_modifiers: ($) =>
-      repeat1(choice($.attribute, $._locally_permitted_modifier)),
+      repeat1(
+        choice(
+          // A compiler directive can sit between a declaration's attributes, so that an
+          // attribute applies only under a condition, as in `@available(*) #if compiler(>=6.2)
+          // @available(*, deprecated) #endif func f()`.
+          seq($.attribute, repeat($.directive)),
+          $._locally_permitted_modifier
+        )
+      ),
     parameter_modifiers: ($) => repeat1($.parameter_modifier),
     _modifier: ($) =>
       choice($._non_local_scope_modifier, $._locally_permitted_modifier),
